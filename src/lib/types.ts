@@ -64,6 +64,33 @@ export type StaffUser = {
   title: string;
 };
 
+export type InventoryItem = {
+  id: string;
+  name: string;
+  category: string;
+  unit: string;
+  cost: number;
+  stock: number;
+  maxStock: number;
+};
+
+export type RecipeIngredient = {
+  inventoryItemId: string;
+  name: string;
+  amount: number;
+  unit: string;
+};
+
+export type UsageLog = {
+  id: string;
+  orderId: string;
+  orderItemId: string;
+  date: string;
+  itemName: string;
+  usedAmount: number;
+  unit: string;
+};
+
 export type StoreData = {
   pos: PosState;
   orders: Order[];
@@ -71,4 +98,7 @@ export type StoreData = {
   categories: string[];
   promotions: Promotion[];
   users: StaffUser[];
+  inventory: InventoryItem[];
+  recipes: Record<string, RecipeIngredient[]>;
+  usageLogs: UsageLog[];
 };
