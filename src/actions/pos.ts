@@ -105,10 +105,35 @@ export async function createOrder(
     }
     charged = total;
     ticketNo = nextTicketNo(store.orders);
+    const orderId = `ord-${Date.now()}`;
+    const createdAt = new Date().toISOString();
+    const usageEntries = [] as typeof store.usageLogs;
+
+    for (const line of priced) {
+      const ingredients = store.recipes[line.productId] ?? [];
+      for (const ingredient of ingredients) {
+        const amount = ingredient.amount * line.qty;
+        const inventory = store.inventory.find((item) =>
+          item.id === ingredient.inventoryItemId || item.name.toLowerCase() === ingredient.name.toLowerCase(),
+        );
+        if (!inventory) continue;
+        inventory.stock = Math.max(0, inventory.stock - amount);
+        usageEntries.push({
+          id: `${orderId}-${inventory.id}`,
+          orderId,
+          orderItemId: line.productId,
+          date: createdAt,
+          itemName: inventory.name,
+          usedAmount: amount,
+          unit: ingredient.unit,
+        });
+      }
+    }
+    store.usageLogs = [...store.usageLogs.filter((entry) => entry.orderId !== orderId), ...usageEntries];
 
     store.orders.push({
-      id: `ord-${Date.now()}`,
-      createdAt: new Date().toISOString(),
+      id: orderId,
+      createdAt,
       baristaName: session.name,
       items: priced,
       subtotal,

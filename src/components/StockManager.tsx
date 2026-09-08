@@ -10,6 +10,8 @@ type StockItem = {
   cost: number;
   stock: number;
   maxStock: number;
+  totalUsed?: number;
+  totalStock?: number;
 };
 
 export function StockManager({ title = "Inventory Management" }: { title?: string }) {
@@ -47,6 +49,7 @@ export function StockManager({ title = "Inventory Management" }: { title?: strin
   const [cost, setCost] = useState("");
   const [stock, setStock] = useState("");
   const [maxStock, setMaxStock] = useState("");
+  const [restockQuantities, setRestockQuantities] = useState<Record<string, string>>({});
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
@@ -82,6 +85,18 @@ export function StockManager({ title = "Inventory Management" }: { title?: strin
 
   const handleDelete = (id: string) => {
     setStocks(stocks.filter((item) => item.id !== id));
+  };
+
+  const handleRestock = (id: string) => {
+    const quantity = Number(restockQuantities[id]);
+    if (!Number.isFinite(quantity) || quantity <= 0) return;
+
+    setStocks((currentStocks) => currentStocks.map((item) => {
+      if (item.id !== id) return item;
+      const totalStock = (item.totalStock ?? item.stock + (item.totalUsed ?? 0)) + quantity;
+      return { ...item, stock: item.stock + quantity, totalStock };
+    }));
+    setRestockQuantities((current) => ({ ...current, [id]: "" }));
   };
 
   const startEdit = (item: StockItem) => {
@@ -174,10 +189,10 @@ export function StockManager({ title = "Inventory Management" }: { title?: strin
             <tr className="bg-neutral-50 border-b border-neutral-200 text-neutral-500 font-medium">
               <th className="p-4">Item Name</th>
               <th className="p-4">Category</th>
-              <th className="p-4">Unit</th>
-              <th className="p-4 text-right">Cost</th>
-              <th className="p-4 text-right">Stock</th>
-              <th className="p-4 text-center">Status %</th>
+              <th className="p-4 text-right">Remaining Stock</th>
+              <th className="p-4 text-right">Total Used</th>
+              <th className="p-4 text-right">Total Stock</th>
+              <th className="p-4 text-center">Restock</th>
               <th className="p-4 text-right">Actions</th>
             </tr>
           </thead>
@@ -205,22 +220,6 @@ export function StockManager({ title = "Inventory Management" }: { title?: strin
                           className="border border-neutral-300 rounded px-2 py-1 text-sm w-full"
                         />
                       </td>
-                      <td className="p-3">
-                        <input
-                          type="text"
-                          value={editUnit}
-                          onChange={(e) => setEditUnit(e.target.value)}
-                          className="border border-neutral-300 rounded px-2 py-1 text-sm w-20"
-                        />
-                      </td>
-                      <td className="p-3 text-right">
-                        <input
-                          type="number"
-                          value={editCost}
-                          onChange={(e) => setEditCost(e.target.value)}
-                          className="border border-neutral-300 rounded px-2 py-1 text-sm w-20 text-right"
-                        />
-                      </td>
                       <td className="p-3 text-right">
                         <input
                           type="number"
@@ -229,6 +228,8 @@ export function StockManager({ title = "Inventory Management" }: { title?: strin
                           className="border border-neutral-300 rounded px-2 py-1 text-sm w-20 text-right"
                         />
                       </td>
+                      <td className="p-3 text-right text-neutral-500">{item.totalUsed ?? 0}</td>
+                      <td className="p-3 text-right font-semibold">{item.totalStock ?? item.stock + (item.totalUsed ?? 0)}</td>
                       <td className="p-3 text-center text-xs text-neutral-400">
                         <input
                           type="number"
@@ -247,15 +248,22 @@ export function StockManager({ title = "Inventory Management" }: { title?: strin
                     <>
                       <td className="p-4 font-medium">{item.name}</td>
                       <td className="p-4 text-neutral-600">{item.category}</td>
-                      <td className="p-4 text-neutral-500">{item.unit}</td>
-                      <td className="p-4 text-right">₱{item.cost.toLocaleString()}</td>
                       <td className="p-4 text-right font-semibold">{item.stock}</td>
+                      <td className="p-4 text-right text-red-600">{item.totalUsed ?? 0}</td>
+                      <td className="p-4 text-right font-semibold">{item.totalStock ?? item.stock + (item.totalUsed ?? 0)}</td>
                       <td className="p-4 text-center">
-                        <span className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
-                          percentage <= 25 ? "bg-red-100 text-red-700" : percentage <= 50 ? "bg-yellow-100 text-yellow-700" : "bg-green-100 text-green-700"
-                        }`}>
-                          {percentage}%
-                        </span>
+                        <div className="flex items-center justify-center gap-2">
+                          <input
+                            type="number"
+                            min="1"
+                            placeholder="+Qty"
+                            value={restockQuantities[item.id] ?? ""}
+                            onChange={(e) => setRestockQuantities((current) => ({ ...current, [item.id]: e.target.value }))}
+                            className="w-20 rounded border border-neutral-300 px-2 py-1 text-center text-xs"
+                            aria-label={`Restock ${item.name}`}
+                          />
+                          <button onClick={() => handleRestock(item.id)} className="rounded bg-teal-700 px-3 py-1 text-xs font-medium text-white hover:bg-teal-800">Add</button>
+                        </div>
                       </td>
                       <td className="p-4 text-right space-x-3">
                         <button onClick={() => startEdit(item)} className="text-blue-600 hover:underline text-xs font-medium">Edit</button>
