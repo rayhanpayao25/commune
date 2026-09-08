@@ -553,9 +553,10 @@ useEffect(() => {
                 <tr className="bg-[#b5d6d8] border-b border-neutral-400 text-neutral-800 text-xs font-semibold">
                   <th className="p-3 border-r border-neutral-300">Item Name</th>
                   <th className="p-3 border-r border-neutral-300">Category</th>
-                  <th className="p-3 border-r border-neutral-300 text-right">Current Stock</th>
-                  <th className="p-3 border-r border-neutral-300 text-center">Restock</th>
+                  <th className="p-3 border-r border-neutral-300 text-right">Remaining Stock</th>
                   <th className="p-3 border-r border-neutral-300 text-right">Total Used</th>
+                  <th className="p-3 border-r border-neutral-300 text-right">Total Stock</th>
+                  <th className="p-3 border-r border-neutral-300 text-center">Restock</th>
                   <th className="p-3 text-center">Actions</th>
                 </tr>
               </thead>
@@ -570,6 +571,8 @@ useEffect(() => {
                       <td className="p-3 border-r border-neutral-200 font-medium">{s.name}</td>
                       <td className="p-3 border-r border-neutral-200 text-neutral-600">{s.category}</td>
                       <td className="p-3 border-r border-neutral-200 text-right font-bold">{s.stock}</td>
+                      <td className="p-3 border-r border-neutral-200 text-right text-red-600 font-medium">{totalUsed}</td>
+                      <td className="p-3 border-r border-neutral-200 text-right font-bold">{s.stock + totalUsed}</td>
                       <td className="p-3 border-r border-neutral-200 text-center">
                         <div className="flex items-center justify-center gap-1">
                           <input
@@ -588,7 +591,6 @@ useEffect(() => {
                           </button>
                         </div>
                       </td>
-                      <td className="p-3 border-r border-neutral-200 text-right text-red-600 font-medium">{totalUsed}</td>
                       <td className="p-3 text-center space-x-2">
                         <button onClick={() => handleEditStock(s)} className="text-blue-600 hover:underline font-medium text-xs">Edit</button>
                         <button onClick={() => handleDeleteStock(s.id)} className="text-red-600 hover:underline font-medium text-xs">Delete</button>

@@ -998,6 +998,38 @@
       "ticketNo": "003",
       "paid": 930,
       "change": 0
+    },
+    {
+      "id": "ord-1788852268390",
+      "createdAt": "2026-09-08T07:24:28.390Z",
+      "baristaName": "sreyka",
+      "items": [
+        {
+          "productId": "spanish-latte",
+          "name": "Spanish Latte",
+          "qty": 1,
+          "price": 125
+        },
+        {
+          "productId": "hazelnut-blanc",
+          "name": "Hazelnut Blanc",
+          "qty": 1,
+          "price": 130
+        },
+        {
+          "productId": "matcha-creme-latte",
+          "name": "Matcha Créme Latte",
+          "qty": 1,
+          "price": 155
+        }
+      ],
+      "subtotal": 410,
+      "discount": 0,
+      "total": 410,
+      "paymentMethod": "cash",
+      "ticketNo": "004",
+      "paid": 2000,
+      "change": 1590
     }
   ],
   "menu": [
