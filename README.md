@@ -4,7 +4,7 @@ Next.js (App Router) + TypeScript project.
 
 ## Getting Started
 
-```bash
+```bashs
 npm run dev
 ```
 
