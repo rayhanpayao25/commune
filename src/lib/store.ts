@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { get, put } from "@vercel/blob";
-import type { MenuItem, Order, Promotion, StaffUser, StoreData } from "@/lib/types";
+import type { InventoryItem, MenuItem, Order, Promotion, RecipeIngredient, StaffUser, StoreData, UsageLog } from "@/lib/types";
 import { DEFAULT_MENU, MENU_CATEGORIES } from "@/lib/menu";
 import { parsePayment } from "@/lib/payments";
 import { DEFAULT_PROMOS } from "@/lib/promos";
@@ -70,6 +70,21 @@ function seedOrders(): Order[] {
   return orders;
 }
 
+const DEFAULT_INVENTORY: InventoryItem[] = [
+  { id: "coffee-beans", name: "Coffee Beans", category: "Ingredients", unit: "grams", cost: 650, stock: 1000, maxStock: 5000 },
+  { id: "milk", name: "Milk", category: "Dairy", unit: "ml", cost: 95, stock: 5000, maxStock: 10000 },
+  { id: "cups", name: "Cups", category: "Packaging", unit: "pcs", cost: 3, stock: 200, maxStock: 1000 },
+  { id: "matcha-powder", name: "Matcha Powder", category: "Ingredients", unit: "grams", cost: 450, stock: 500, maxStock: 1000 },
+];
+
+const DEFAULT_RECIPES: Record<string, RecipeIngredient[]> = Object.fromEntries(
+  DEFAULT_MENU.map((item) => [item.id, [
+    { inventoryItemId: "coffee-beans", name: "Coffee Beans", amount: 18, unit: "grams" },
+    { inventoryItemId: "milk", name: "Milk", amount: 133, unit: "ml" },
+    { inventoryItemId: "cups", name: "Cups", amount: 1, unit: "pcs" },
+  ]]),
+);
+
 function emptyStore(): StoreData {
   return {
     pos: { isOpen: false, openedAt: null, openedBy: null },
@@ -78,6 +93,9 @@ function emptyStore(): StoreData {
     categories: [...MENU_CATEGORIES],
     promotions: DEFAULT_PROMOS.map((item) => ({ ...item })),
     users: DEFAULT_USERS.map((item) => ({ ...item })),
+    inventory: DEFAULT_INVENTORY.map((item) => ({ ...item })),
+    recipes: structuredClone(DEFAULT_RECIPES),
+    usageLogs: [],
   };
 }
 
@@ -127,6 +145,23 @@ function normalizeStore(store: StoreData): StoreData {
       type: item.type === "amount" ? "amount" : "percent",
       value: Number(item.value) || 0,
     }));
+  }
+  if (!Array.isArray(store.inventory)) {
+    store.inventory = DEFAULT_INVENTORY.map((item) => ({ ...item }));
+  } else {
+    store.inventory = store.inventory.map((item) => ({
+      ...item,
+      stock: Number(item.stock) || 0,
+      maxStock: Number(item.maxStock) || 0,
+      cost: Number(item.cost) || 0,
+      unit: item.unit || "pcs",
+    }));
+  }
+  if (!store.recipes || typeof store.recipes !== "object") {
+    store.recipes = structuredClone(DEFAULT_RECIPES);
+  }
+  if (!Array.isArray(store.usageLogs)) {
+    store.usageLogs = [];
   }
   if (!Array.isArray(store.users) || store.users.length === 0) {
     store.users = DEFAULT_USERS.map((item) => ({ ...item }));
