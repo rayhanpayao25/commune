@@ -222,42 +222,6 @@ async function writeBlobStore(store: StoreData) {
   });
 }
 
-// Automatic helper para i-sync ang orders papuntang client-side transactions localStorage kapag hinila ang store
-function syncTransactionsToLocalStorage(orders: Order[]) {
-  if (typeof window === "undefined") return;
-  try {
-    const existingTxRaw = localStorage.getItem("sys_transactions");
-    let transactions = existingTxRaw ? JSON.parse(existingTxRaw) : [];
-    let hasNew = false;
-
-    orders.forEach((order) => {
-      const exists = transactions.some((t: any) => t.id === order.id);
-      if (!exists) {
-        hasNew = true;
-        const productString = order.items.map((i) => `${i.qty}x ${i.name}`).join(", ");
-        const orderDate = order.createdAt ? order.createdAt.split("T")[0] : new Date().toISOString().split("T")[0];
-        
-        const newTx = {
-          id: order.id || Date.now().toString(),
-          productName: productString,
-          type: "Sale",
-          quantity: order.items.reduce((acc, item) => acc + item.qty, 0),
-          price: order.total,
-          amount: order.total,
-          date: orderDate,
-        };
-        transactions.unshift(newTx);
-      }
-    });
-
-    if (hasNew) {
-      localStorage.setItem("sys_transactions", JSON.stringify(transactions));
-    }
-  } catch (e) {
-    console.error("Failed to sync transactions to localStorage", e);
-  }
-}
-
 async function readStore(): Promise<StoreData> {
   let store: StoreData;
   if (usesBlobStorage()) {
@@ -286,19 +250,10 @@ async function readStore(): Promise<StoreData> {
     }
   }
 
-  // I-trigger ang automatic sync dito para sa mga orders patungong Transactions tab
-  if (store.orders && store.orders.length > 0) {
-    syncTransactionsToLocalStorage(store.orders);
-  }
-
   return store;
 }
 
 async function writeStore(store: StoreData): Promise<void> {
-  if (store.orders && store.orders.length > 0) {
-    syncTransactionsToLocalStorage(store.orders);
-  }
-
   if (usesBlobStorage()) {
     await writeBlobStore(store);
     return;
@@ -336,3 +291,4 @@ export function updateStore(
     return store;
   });
 }
+

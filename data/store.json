@@ -1030,6 +1030,32 @@
       "ticketNo": "004",
       "paid": 2000,
       "change": 1590
+    },
+    {
+      "id": "ord-1788853165422",
+      "createdAt": "2026-09-08T07:39:25.422Z",
+      "baristaName": "sreyka",
+      "items": [
+        {
+          "productId": "hojicha-latte",
+          "name": "Hojicha Latte",
+          "qty": 2,
+          "price": 155
+        },
+        {
+          "productId": "revel-bar",
+          "name": "Revel Bar",
+          "qty": 1,
+          "price": 85
+        }
+      ],
+      "subtotal": 395,
+      "discount": 0,
+      "total": 395,
+      "paymentMethod": "cash",
+      "ticketNo": "005",
+      "paid": 1000,
+      "change": 605
     }
   ],
   "menu": [
@@ -1308,6 +1334,642 @@
       "title": "Barista",
       "role": "barista",
       "password": "commune"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "coffee-beans",
+      "name": "Coffee Beans",
+      "category": "Ingredients",
+      "unit": "grams",
+      "cost": 650,
+      "stock": 946,
+      "maxStock": 5000
+    },
+    {
+      "id": "milk",
+      "name": "Milk",
+      "category": "Dairy",
+      "unit": "ml",
+      "cost": 95,
+      "stock": 4601,
+      "maxStock": 10000
+    },
+    {
+      "id": "cups",
+      "name": "Cups",
+      "category": "Packaging",
+      "unit": "pcs",
+      "cost": 3,
+      "stock": 197,
+      "maxStock": 1000
+    },
+    {
+      "id": "matcha-powder",
+      "name": "Matcha Powder",
+      "category": "Ingredients",
+      "unit": "grams",
+      "cost": 450,
+      "stock": 500,
+      "maxStock": 1000
+    }
+  ],
+  "recipes": {
+    "commune-signature": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "honey-oat": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "spanish-latte": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "sea-salt-cream": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "americano-long-black": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "latte": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "cappuccino": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "biscoff-latte": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "caramel-macchiato": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "hazelnut-blanc": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "strawberry-creme": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "oreo-blush": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "chocolate": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "strawberry-whisper": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "watermelon-whisper": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "matcha-umami": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "matcha-latte": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "hojicha-latte": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "matcha-creme-latte": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "sea-salt-matcha-cloud": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "fries": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "tuna-sandwich": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "club-sandwich": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "choco-chip-cookie": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "red-velvet-cookie": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "choco-fudge": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "revel-bar": [
+      {
+        "inventoryItemId": "coffee-beans",
+        "name": "Coffee Beans",
+        "amount": 18,
+        "unit": "grams"
+      },
+      {
+        "inventoryItemId": "milk",
+        "name": "Milk",
+        "amount": 133,
+        "unit": "ml"
+      },
+      {
+        "inventoryItemId": "cups",
+        "name": "Cups",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ]
+  },
+  "usageLogs": [
+    {
+      "id": "ord-1788853165422-coffee-beans",
+      "orderId": "ord-1788853165422",
+      "orderItemId": "hojicha-latte",
+      "date": "2026-09-08T07:39:25.422Z",
+      "itemName": "Coffee Beans",
+      "usedAmount": 36,
+      "unit": "grams"
+    },
+    {
+      "id": "ord-1788853165422-milk",
+      "orderId": "ord-1788853165422",
+      "orderItemId": "hojicha-latte",
+      "date": "2026-09-08T07:39:25.422Z",
+      "itemName": "Milk",
+      "usedAmount": 266,
+      "unit": "ml"
+    },
+    {
+      "id": "ord-1788853165422-cups",
+      "orderId": "ord-1788853165422",
+      "orderItemId": "hojicha-latte",
+      "date": "2026-09-08T07:39:25.422Z",
+      "itemName": "Cups",
+      "usedAmount": 2,
+      "unit": "pcs"
+    },
+    {
+      "id": "ord-1788853165422-coffee-beans",
+      "orderId": "ord-1788853165422",
+      "orderItemId": "revel-bar",
+      "date": "2026-09-08T07:39:25.422Z",
+      "itemName": "Coffee Beans",
+      "usedAmount": 18,
+      "unit": "grams"
+    },
+    {
+      "id": "ord-1788853165422-milk",
+      "orderId": "ord-1788853165422",
+      "orderItemId": "revel-bar",
+      "date": "2026-09-08T07:39:25.422Z",
+      "itemName": "Milk",
+      "usedAmount": 133,
+      "unit": "ml"
+    },
+    {
+      "id": "ord-1788853165422-cups",
+      "orderId": "ord-1788853165422",
+      "orderItemId": "revel-bar",
+      "date": "2026-09-08T07:39:25.422Z",
+      "itemName": "Cups",
+      "usedAmount": 1,
+      "unit": "pcs"
     }
   ]
 }

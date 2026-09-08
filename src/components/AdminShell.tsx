@@ -2,11 +2,12 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 import { UserManager } from "@/components/UserManager";
+import { StockAndUsageExample } from "@/components/StockAndUsageExample";
 import { SalePurchaseTransactions } from "@/components/SalePurchaseTransactions";
 import type { PublicStaffUser } from "@/lib/users";
 import type { Session } from "@/lib/types";
 
-type PanelType = "sales" | "staff" | "transactions";
+type PanelType = "sales" | "staff" | "transactions" | "example";
 
 type AdminShellProps = {
   session: Session;
@@ -48,6 +49,7 @@ export function AdminShell({ session, users, children }: AdminShellProps) {
                 ["sales", "Sales"],
                 ["staff", "Staff"],
                 ["transactions", "Transactions"],
+                ["example", "Logbook Example"],
               ] as const
             ).map(([id, label]) => (
               <button
@@ -74,6 +76,7 @@ export function AdminShell({ session, users, children }: AdminShellProps) {
               ["sales", "Sales"],
               ["staff", "Staff"],
               ["transactions", "Transactions"],
+              ["example", "Logbook Example"],
             ] as const
           ).map(([id, label]) => (
             <button
@@ -94,6 +97,7 @@ export function AdminShell({ session, users, children }: AdminShellProps) {
       {panel === "sales" && children}
       {panel === "staff" && <UserManager users={users} session={session} />}
       {panel === "transactions" && <SalePurchaseTransactions />}
+      {panel === "example" && <StockAndUsageExample />}
     </>
   );
 }
